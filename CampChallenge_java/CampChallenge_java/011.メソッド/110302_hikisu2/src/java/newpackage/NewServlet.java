@@ -43,6 +43,11 @@ public class NewServlet extends HttpServlet {
         
     }
     
+    //ユーザー定義メソッド
+    //上記のkakeの初期値設定
+    void kake(int nam,PrintWriter pr){
+        kake(5,nam,false,pr);
+    }
     
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -56,7 +61,14 @@ public class NewServlet extends HttpServlet {
             out.println("<title>Servlet NewServlet</title>");            
             out.println("</head>");
             out.println("<body>");
+            
+            //引数４つでkakeメソッドを実行
             kake(2,3,true,out);
+            
+            out.print("<br>");
+            //引数２つでkakeメソッドを実行
+            kake(5,out);
+            
             out.println("</body>");
             out.println("</html>");
         }
