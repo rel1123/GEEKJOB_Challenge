@@ -51,11 +51,11 @@ public class Zikkou extends HttpServlet {
 //タイムスタンプ
 
 
-            out.print(stamp.d3.getTime()+"<br>");
-            out.print(stamp.sdf2.format(stamp.d3));
+//            out.print(stamp.d3.getTime()+"<br>");
+//            out.print(stamp.sdf2.format(stamp.d3));
             
-//            out.print(stamp.sdf.format(stamp.d4)+"と"+stamp.sdf.format(stamp.d5)+"の差は、、、<br>");
-//            out.print(stamp.sa()+"ミリ秒");
+            out.print(stamp.sdf.format(stamp.d4)+"と"+stamp.sdf.format(stamp.d5)+"の差は、、、<br>");
+            out.print(stamp.sa()+"ミリ秒");
 
 //            out.print(stamp.sdf.format(stamp.d6)+"と"+stamp.sdf.format(stamp.d7)+"の差は、、、");
 //            out.print(stamp.sa2());
