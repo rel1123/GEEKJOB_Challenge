@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form action="/180300_dbsosa/errorbr11Servlet" method = "post">
+            <p>レコード追加</p>
+            <!-- 名前検索
+            <input type="text" name="name" value="" />
+            <br>
+            <input type="submit" name="submit" value="送信！" />
+            -->
+            プロフィールID　<input type="number" name="nProfilesID"/><br>
+            名前　　　　　　<input type="text" name="nName"/><br>
+            電話番号　　　　<input type="text" name="nTel"/><br>
+            年齢　　　　　　<input type="number" name="nAge"/><br>
+            誕生日　　　　　<input type="date" name="nBirthday"/><br>
+            <input type="submit" name="nSubmit" value="レコード追加します！">
+        </form>
+        <form action="/180300_dbsosa/errorbr11Servlet" method = "post">
+            <p>レコード削除</p>
+            プロフィールID　<input type="number" name="dProfilesID"/><br>
+            <input type="submit" name="dSubmit" value="レコード削除します！">
+        </form>
+            <form action="/180300_dbsosa/errorbr11Servlet" method = "post">
+            <p>レコード更新</p>
+            プロフィールID　<input type="number" name="rProfilesID"/><br>
+            名前　　　　　　<input type="text" name="rName"/><br>
+            電話番号　　　　<input type="text" name="rTel"/><br>
+            年齢　　　　　　<input type="number" name="rAge"/><br>
+            誕生日　　　　　<input type="date" name="rBirthday"/><br>
+            <input type="submit" name="dSubmit" value="レコード更新します！">
+        </form>
+        
+    </body>
+</html>
