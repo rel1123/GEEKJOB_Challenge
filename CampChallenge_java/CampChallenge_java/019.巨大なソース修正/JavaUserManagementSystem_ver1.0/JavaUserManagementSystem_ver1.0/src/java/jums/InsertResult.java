@@ -59,6 +59,7 @@ public class InsertResult extends HttpServlet {
             UserDataDAO .getInstance().insert(userdata);
             
             //セッションの削除
+            //課題----------------------------------------------------------------
             session.removeAttribute("DATA");
             session.removeAttribute("name");
             session.removeAttribute("year");
