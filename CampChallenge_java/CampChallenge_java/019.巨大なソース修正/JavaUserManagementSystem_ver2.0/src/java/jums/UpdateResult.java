@@ -2,10 +2,12 @@ package jums;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -24,22 +26,53 @@ public class UpdateResult extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet UpdateResult</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet UpdateResult at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
-            out.close();
+        //セッションスタート
+        HttpSession session = request.getSession();
+        
+        try{
+            request.setCharacterEncoding("UTF-8");//リクエストパラメータの文字コードをUTF-8に変更
+        
+            //フォームからの入力を取得して、JavaBeansに格納
+            UserDataBeans udb = new UserDataBeans();
+            udb.setName(request.getParameter("name"));
+            udb.setYear(request.getParameter("year"));
+            udb.setMonth(request.getParameter("month"));
+            udb.setDay(request.getParameter("day"));
+            udb.setType(request.getParameter("type"));
+            udb.setTell(request.getParameter("tell"));
+            udb.setComment(request.getParameter("comment"));
+            
+            //DTOオブジェクトにマッピング。DB専用のパラメータに変換
+            UserDataDTO searchData = new UserDataDTO();
+            udb.UD2DTOMapping(searchData);
+            
+            //課題６
+            //userIDをDTOにセット
+            searchData.setUserID(Integer.valueOf(session.getAttribute("userID").toString()));
+
+            //課題６
+            //DBへのデータ挿入
+            UserDataDAO .getInstance() .update(searchData);
+            
+            
+            //課題６
+            //結果画面で表示用に入力パラメータをリクエストパラメータとして保持
+            request.setAttribute("udb", udb);
+            
+            UserDataDTO resultData = UserDataDAO .getInstance().searchByID(searchData);
+            request.setAttribute("resultData", resultData);
+            
+            //セッションの値を削除
+            session.invalidate();
+            
+            request.getRequestDispatcher("/updateresult.jsp").forward(request, response);  
+        }catch(Exception e){
+            //何らかの理由で失敗したらエラーページにエラー文を渡して表示。想定は不正なアクセスとDBエラー
+            request.setAttribute("error", e.getMessage());
+            request.getRequestDispatcher("/error.jsp").forward(request, response);
         }
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -82,3 +115,4 @@ public class UpdateResult extends HttpServlet {
     }// </editor-fold>
 
 }
+

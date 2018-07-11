@@ -1,6 +1,8 @@
 package jums;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -9,7 +11,9 @@ import java.util.Date;
  * @version 1.00
  * @author hayashi-s
  */
-public class UserDataDTO {
+public class UserDataDTO implements Serializable {
+    
+    //課題
     private int userID;
     private String name;
     private Date birthday;
@@ -17,6 +21,10 @@ public class UserDataDTO {
     private int type;
     private String comment;
     private Timestamp newDate;
+    
+    public UserDataDTO(){
+
+    }
     
     
     public int getUserID() {
@@ -67,5 +75,4 @@ public class UserDataDTO {
     public void setNewDate(Timestamp newDate) {
         this.newDate = newDate;
     }
-
 }
